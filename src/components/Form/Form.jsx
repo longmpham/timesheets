@@ -16,6 +16,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
 import "./Form.css"
+import Submit from './Submit';
 
 const Form = () => {
 
@@ -62,11 +63,12 @@ const employeeIDs = [
 //   ]
 
   const [date, setDate] = useState(null);
-  const [projectID, setProjectID] = useState(projectIDs[0])
-  const [projectPhaseID, setProjectPhaseID] = useState(projectPhaseIDs[0])
-  const [userType, setuserType] = useState(userTypes[0])
-  const [employeeID, setEmployeeID] = useState(employeeIDs[0].id)
-  const [hour, setHour] = useState(0)
+  const [projectID, setProjectID] = useState(projectIDs[0]);
+  const [projectPhaseID, setProjectPhaseID] = useState(projectPhaseIDs[0]);
+  const [userType, setuserType] = useState(userTypes[0]);
+  const [employeeID, setEmployeeID] = useState(employeeIDs[0].id);
+  const [hour, setHour] = useState(0);
+  const [submission, setSubmission] = useState(null)
 
   const handleProjectChange = (event) => {
     setProjectID(event.target.value);
@@ -108,6 +110,14 @@ const employeeIDs = [
     console.log("MM//DD//YYYY: " + finalDate)
     console.log("Full Date: " + value)
     setDate(finalDate);
+  }
+
+  const submitTimesheet = () => {
+    const submission = {
+        date,projectID,projectPhaseID,userType,hour
+    }
+    console.log(submission)
+    setSubmission(submission)
   }
 
   return (
@@ -234,9 +244,15 @@ const employeeIDs = [
             </Grid>
             <Grid container ml={2} mr={2} mb={5}>
                 <Grid item ml={2} mr={2}>
-                <Button variant="contained" endIcon={<SendIcon />}>Submit</Button>
+                    <Button variant="contained" endIcon={<SendIcon />} onClick={() => submitTimesheet()}>Submit</Button>
                 </Grid>
             </Grid>
+            <Grid container ml={2} mr={2} mb={5}>
+                <Grid item ml={2} mr={2}>
+                    <Submit {...submission}/>
+                </Grid>
+            </Grid>
+
         </Grid>
     </Box>
   )
