@@ -103,8 +103,11 @@ const employeeIDs = [
     setHour(Number(value));
   }
   const setCalendarDate = (value) => {
-    console.log(value)
-    setDate(value);
+    let finalDate = new Date(value)
+    finalDate = (value.getMonth() + 1) + '/' +  value.getDate()  + '/' +  value.getFullYear()
+    console.log("MM//DD//YYYY: " + finalDate)
+    console.log("Full Date: " + value)
+    setDate(finalDate);
   }
 
   return (
